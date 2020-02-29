@@ -11,6 +11,8 @@ export default class Table extends React.Component {
 
         this.state = {
             usuarios: [],
+            orderState: false
+
         };
     }
 
@@ -40,6 +42,43 @@ export default class Table extends React.Component {
         }
     }
 
+   sortById = id =>{
+        if(this.state.orderState === false){
+           this.setState({ 
+                usuarios : this.state.usuarios.sort( (a,b) =>{
+                    return  b[id] - a[id]
+                })
+           }) 
+
+            this.setState({orderState :true})
+        }
+        else{
+
+            this.setState({ 
+                usuarios : this.state.usuarios.sort( (a,b) =>{
+                    return  a[id] - b[id]
+                })
+           }) 
+            
+            this.setState({orderState : false})
+
+        }    
+       
+    }
+
+    
+    getKeySort = col =>{
+       if(col === 'ID'){
+           return <button className="btn btn-primary" onClick={() => this.sortById('id')}>
+                    ID <i className={this.state.orderState ? 'fa fa-chevron-up' : "fa fa-chevron-down"} aria-hidden="true"></i>
+                  </button>
+       }
+       else{
+           return col
+       }
+   }
+
+
     render() {
         return (
             <div className="container">
@@ -47,7 +86,7 @@ export default class Table extends React.Component {
                     <thead>
                         <tr>
                             {this.props.columns.map((col, index) =>
-                                <th key={index}>{col}</th>
+                            <th key={index}>{this.getKeySort(col)}</th>
                             )}
                             <th>
                                 <button type="button" className="btn btn-primary left-button">

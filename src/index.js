@@ -11,7 +11,7 @@ import Table from './components/Table';
 
 ReactDOM.render(
     
-    <Table columns={['ID','NOME','SOBRENOME', 'EMAIL', 'ACAO']}/>
+    <Table columns={['ID','NOME','SOBRENOME', 'EMAIL', 'AÇAO']}/>
 
 , document.getElementById('root'));
 

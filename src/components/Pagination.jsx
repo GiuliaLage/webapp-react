@@ -11,9 +11,11 @@ export default class Pagination extends React.Component{
          PaginaAtual = 1
       }  
     }
+    
     /*getPaginationResult = (page,limit) =>{
         axios.get(configs.BASE_URL + `users?_page=${page}&_limite=${limit}`)
-    }*/
+    }
+    */
     
     getPaginationResult = () =>{
         let getPage = this.state.PaginaAtual + 1 
