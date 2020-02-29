@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
-import Table from './components/Table'
-import 'font-awesome/css/font-awesome.min.css';
-ReactDOM.render(
-  
-    <Table
-    columns={['ID','NOME','SOBRENOME', 'EMAIL', 'ACAO']}
-    >
 
-    </Table>
- 
+import './index.css';
+import Table from './components/Table';
+
+
+ReactDOM.render(
     
-    
+    <Table columns={['ID','NOME','SOBRENOME', 'EMAIL', 'ACAO']}/>
+
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

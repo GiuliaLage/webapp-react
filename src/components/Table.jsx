@@ -24,9 +24,20 @@ export default class Table extends React.Component {
 
     splitNames = (name, index) => {
 
-        let splitName = name.split(' ')
-        name = splitName[index]
-        return name
+        let splitName = name.split(' ')   
+
+        if(splitName.includes('Mrs.') || splitName.includes('Miss.')){
+            name = splitName[index + 1]
+            return name
+        }
+        else if(index === 1){
+         name = splitName[splitName.length - 1]
+         return name
+        }
+        else{
+            name = splitName[index]
+            return name
+        }
     }
 
     render() {
@@ -42,7 +53,6 @@ export default class Table extends React.Component {
                                 <button type="button" className="btn btn-primary left-button">
                                     <i className="fa fa-chevron-left" aria-hidden="true"></i>
                                 </button>
-                               
                                 <button type="button" className="btn btn-primary">
                                     <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                 </button>
