@@ -2,12 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-//import axios from 'axios'
-//import configs from '../../db/configs.json'
 
 import './Table.css'
 import Detalhes from '../Detalhes/Detalhes'
-import { PaginationAction, getUsuarios } from './PaginationAction'
+import {getUsuarios } from './GetDataAction'
+import Pagination from '../Pagination/Pagination'
 
 class Table extends React.Component {
 
@@ -92,20 +91,14 @@ class Table extends React.Component {
                             <th key={index}>{this.getKeySort(col)}</th>
                             )}
                             <th>
-                                <button onClick={this.props.PaginationAction} className="btn btn-primary">
-                                    Limitar Resultados
-                                </button>
-                                <button type="button" className="btn btn-primary left-button">
-                                    <i className="fa fa-chevron-left" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" className="btn btn-primary">
-                                    <i className="fa fa-chevron-right" aria-hidden="true"></i>
-                                </button>   
+                              <Pagination
+                               
+                              />
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.usuarios.map((usuario, index) =>
+                        {this.props.usuarios && this.props.usuarios.map((usuario, index) =>
                             <tr key={index}>
                                 <td>{usuario.id}</td>
                                 <td>{this.splitNames(usuario.name, 0)}</td>
@@ -123,8 +116,9 @@ class Table extends React.Component {
 
 const mapStateToProps = state => ({
     
-    usuarios : state.ArrayUsers.usuarios
+    usuarios : state.ArrayUsers.usuarios,
+    
 })
                                       // passar todas as action dentro do bindActionCreators
-const mapDispatchToProps = dispatch => bindActionCreators({PaginationAction, getUsuarios} , dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({getUsuarios} , dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(Table)

@@ -4,7 +4,7 @@ import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux'
 import promise from 'redux-promise'
 import * as serviceWorker from './serviceWorker';
-
+import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -15,7 +15,7 @@ import reducers from './main/reducers'
 const DevTools = window.__REDUX_DEVTOOLS_EXTENSION__
 &&  window.__REDUX_DEVTOOLS_EXTENSION__()
 
-const store = applyMiddleware(promise)(createStore)(reducers, DevTools)
+const store = applyMiddleware(thunk,promise)(createStore)(reducers, DevTools)
 
 ReactDOM.render(
     <div>

@@ -1,8 +1,12 @@
 import {combineReducers} from 'redux'
-import PaginationReducer from './../components/PaginationReducer'
+import GetDataReducer from '../components/Table/GetDataReducer'
+
 
 const rootReducer = combineReducers({
-    ArrayUsers: PaginationReducer
+    ArrayUsers: GetDataReducer,
+    PaginaAtual : GetDataReducer,
+    Limit : GetDataReducer,
+    Usuarios_static : GetDataReducer
 })
 
 export default rootReducer
