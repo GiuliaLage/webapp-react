@@ -1,10 +1,15 @@
 import React from 'react'
-import axios from 'axios'
-import configs from '../db/configs'
-import './Table.css'
-import Detalhes from './Detalhes'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
-export default class Table extends React.Component {
+//import axios from 'axios'
+//import configs from '../../db/configs.json'
+
+import './Table.css'
+import Detalhes from '../Detalhes/Detalhes'
+import { PaginationAction, getUsuarios } from './PaginationAction'
+
+class Table extends React.Component {
 
     constructor(props) {
         super(props);
@@ -16,13 +21,12 @@ export default class Table extends React.Component {
         };
     }
 
-    componentDidMount() {
-
-        axios.get(configs.BASE_URL + 'users')
-            .then(response => {
-                this.setState({ usuarios: response.data });
-            })
+   async componentDidMount() {
+         
+        await this.props.getUsuarios()
+     
     }
+
 
     splitNames = (name, index) => {
 
@@ -45,7 +49,7 @@ export default class Table extends React.Component {
    sortById = id =>{
         if(this.state.orderState === false){
            this.setState({ 
-                usuarios : this.state.usuarios.sort( (a,b) =>{
+                usuarios : this.props.usuarios.sort( (a,b) =>{
                     return  b[id] - a[id]
                 })
            }) 
@@ -55,7 +59,7 @@ export default class Table extends React.Component {
         else{
 
             this.setState({ 
-                usuarios : this.state.usuarios.sort( (a,b) =>{
+                usuarios : this.props.usuarios.sort( (a,b) =>{
                     return  a[id] - b[id]
                 })
            }) 
@@ -78,7 +82,6 @@ export default class Table extends React.Component {
        }
    }
 
-
     render() {
         return (
             <div className="container">
@@ -89,17 +92,20 @@ export default class Table extends React.Component {
                             <th key={index}>{this.getKeySort(col)}</th>
                             )}
                             <th>
+                                <button onClick={this.props.PaginationAction} className="btn btn-primary">
+                                    Limitar Resultados
+                                </button>
                                 <button type="button" className="btn btn-primary left-button">
                                     <i className="fa fa-chevron-left" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" className="btn btn-primary">
                                     <i className="fa fa-chevron-right" aria-hidden="true"></i>
-                                </button>
+                                </button>   
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.usuarios.map((usuario, index) =>
+                        {this.props.usuarios.map((usuario, index) =>
                             <tr key={index}>
                                 <td>{usuario.id}</td>
                                 <td>{this.splitNames(usuario.name, 0)}</td>
@@ -114,3 +120,11 @@ export default class Table extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    
+    usuarios : state.ArrayUsers.usuarios
+})
+                                      // passar todas as action dentro do bindActionCreators
+const mapDispatchToProps = dispatch => bindActionCreators({PaginationAction, getUsuarios} , dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(Table)

@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import configs from '../db/configs.json'
+import configs from '../../db/configs.json'
 import Modal from "react-bootstrap/Modal";
 
 export default class Detalhes extends React.Component {
@@ -42,7 +42,7 @@ export default class Detalhes extends React.Component {
                         <Modal.Body>
                              <ul className="list-group">
                                 <li className="list-group-item">
-                                    <strong>Telefone:: </strong>  
+                                    <strong>Telefone: </strong>  
                                         {this.state.user_info.phone} 
                                 </li>
                                 <li className="list-group-item">
