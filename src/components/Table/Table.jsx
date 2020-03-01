@@ -119,6 +119,6 @@ const mapStateToProps = state => ({
     usuarios : state.ArrayUsers.usuarios,
     
 })
-                                      // passar todas as action dentro do bindActionCreators
+            
 const mapDispatchToProps = dispatch => bindActionCreators({getUsuarios} , dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(Table)

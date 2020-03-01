@@ -3,9 +3,7 @@ import axios from 'axios'
 import configs from '../../db/configs.json'
 
 export const GetPagination = (currentPage, Limite) =>{
-    console.log(Limite, currentPage)
     if(Limite === false){
-        console.log('entrei')
         Limite = true
         return dispatch =>{
             axios.get(configs.BASE_URL + `users?_page=${currentPage}&_limit=5`)
@@ -38,17 +36,13 @@ export const GetPagination = (currentPage, Limite) =>{
 export const NavPaginationInc =  (currentPage, usuarios, limite) =>{
 
     let ManyPages = usuarios.length / 5
-    console.log(ManyPages)
-   
-
-    console.log(currentPage,ManyPages, limite)
     
      if(currentPage < ManyPages && limite === true){
-          console.log('INCREMENTA')
+        
           currentPage = currentPage + 1
       }
       else{
-          console.log('NAO FAZ NADA')
+         
          return {
             type: 'NOT_PAGINATION'
          }
@@ -69,15 +63,13 @@ export const NavPaginationInc =  (currentPage, usuarios, limite) =>{
 
 export const NavPaginationDec =  (currentPage) =>{
 
-    console.log(currentPage)
-    
      if(currentPage !== 1 ){
-          console.log('DECREMENTA')
+          
            currentPage = currentPage - 1
 
       }
       else{
-          console.log('NAO FAZ NADA')
+         
          return {
             type: 'NOT_PAGINATION'
          }
